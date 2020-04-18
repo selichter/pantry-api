@@ -40,7 +40,7 @@ group :development do
   # running in the background.Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rubocop', '~> 0.39.0'
+  gem 'rubocop', '~> 0.48.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
