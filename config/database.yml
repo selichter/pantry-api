@@ -96,7 +96,6 @@ development:
   <<: *default
   database: pantry_api_development
 
-
 test:
   <<: *default
   database: pantry_api_test

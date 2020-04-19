@@ -22,3 +22,21 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+Stand up app on port :3000:
+`docker-compose up --build`
+
+Stand up db:
+`docker-compose run web rake db:create`
+
+Run Tests:
+`cucumber .` from the features directory
+`cucumber . health.feature -r step_definitions/health_steps.rb`
+
+
+```
+docker-compose up
+docker-compose run -e "RAILS_ENV=test" web rake db:create db:migrate
+docker-compose run -e "RAILS_ENV=test" web rspec spec
+```
