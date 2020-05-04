@@ -40,3 +40,7 @@ docker-compose up
 docker-compose run -e "RAILS_ENV=test" web rake db:create db:migrate
 docker-compose run -e "RAILS_ENV=test" web rspec spec
 ```
+
+
+Migration:
+docker-compose run web rake db:migrate RAILS_ENV=test

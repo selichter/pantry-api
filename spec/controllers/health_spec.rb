@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ApplicationController, type: :controller do
   include Capybara::DSL
 
-  describe 'GET index' do
+  describe 'POST index' do
     it 'returns health json' do
       get :index
       expect(response.status).to eq(200)
