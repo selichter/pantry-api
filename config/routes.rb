@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
   root 'application#index'
-  resource :items, only: [:create]
+
+  resources :items, only: [:index, :create]
 end
