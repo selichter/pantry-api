@@ -5,6 +5,15 @@ class ItemsController < ApplicationController
     render json: @items, status: :ok
   end
 
+  def show
+    item = Item.find_by_id(params[:id])
+    if item.nil?
+      render json: { data: 'Item not found' }, status: 404
+    else
+      render json: item, status: :ok
+    end
+  end
+
   def create
     item = Item.new(item_params)
     if item.save
