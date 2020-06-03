@@ -31,7 +31,7 @@ RSpec.describe 'Item endpoints', type: :request do
 
     it 'gets all items' do
       Item.create valid_attributes
-      Item.create({name: 'chicken', amount: 4})
+      Item.create({ name: 'chicken', amount: 4 })
       get '/items'
 
       item_response = JSON.parse(response.body)
@@ -54,6 +54,27 @@ RSpec.describe 'Item endpoints', type: :request do
       expect(response.status).to eq(200)
       expect(item_response).to eq([])
     end
+  end
+
+  describe 'PUT' do
+    it "updates an item properly" do
+      item = Item.create valid_attributes
+
+      put "/items/#{item.id}", params: { item: { amount: 77 } }
+      item.reload
+      expect(response.status).to be(201)
+      expect(item.amount).to eq(77)
+    end
+
+    it "raises bad request error when it cannot update an item" do
+      item = Item.create valid_attributes
+
+      put "/items/#{item.id}", params: { item: { amount: 'seventy-seven' } }
+      item.reload
+      expect(response.status).to be(400)
+      expect(item.amount).to eq(1)
+    end
+
   end
 
 end
