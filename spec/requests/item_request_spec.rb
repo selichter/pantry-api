@@ -28,7 +28,6 @@ RSpec.describe 'Item endpoints', type: :request do
   end
 
   describe 'GET' do
-
     it 'gets all items' do
       Item.create valid_attributes
       Item.create({ name: 'chicken', amount: 4 })
@@ -46,7 +45,7 @@ RSpec.describe 'Item endpoints', type: :request do
       expect(second_item['name']).to eq('chicken')
     end
 
-    it 'returns an empty list when there are now items' do
+    it 'returns an empty list when there are no items' do
       get '/items'
 
       item_response = JSON.parse(response.body)
@@ -55,6 +54,25 @@ RSpec.describe 'Item endpoints', type: :request do
       expect(item_response).to eq([])
     end
   end
+
+  describe 'GET item by Id' do
+    it 'gets item by id' do
+      item = Item.create valid_attributes
+      get "/items/#{item.id}"
+
+      item_response = JSON.parse(response.body)
+
+      expect(response.status).to eq(200)
+      expect(item_response['amount']).to eq(1)
+      expect(item_response['name']).to eq('steak')
+    end
+
+    it 'returns not found with id that does not exist' do
+      get "/items/790"
+      expect(response.status).to eq(404)
+    end
+
+end
 
   describe 'PUT' do
     it "updates an item properly" do
@@ -74,7 +92,6 @@ RSpec.describe 'Item endpoints', type: :request do
       expect(response.status).to be(400)
       expect(item.amount).to eq(1)
     end
-
   end
 
 end
