@@ -24,14 +24,16 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS),
 # making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 gem 'jaro_winkler', '~> 1.4'
 gem 'activesupport', '>= 6.0.3.1'
+gem 'devise_token_auth'
 
 group :test do
   gem 'capybara'
   gem 'cucumber-rails', '~> 1.4', '>= 1.4.3'
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
+  gem 'factory_bot_rails'
 end
 
 group :development, :test do
