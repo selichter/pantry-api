@@ -18,7 +18,6 @@ RSpec.describe "Registration", :type => :request do
       end
 
       it 'returns status 200' do
-        puts response
         expect(response).to have_http_status(200)
       end
 
