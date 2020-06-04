@@ -15,7 +15,7 @@ RSpec.describe 'Item endpoints', type: :request do
       error_response = JSON.parse(response.body)['data']
 
       expect(response.status).to eq(400)
-      expect(error_response['amount']).to eq(["can't be blank", "is not a number"])
+      expect(error_response['amount']).to eq(["can't be blank", 'is not a number'])
     end
 
     it 'returns error on create an item with missing name' do
@@ -68,14 +68,13 @@ RSpec.describe 'Item endpoints', type: :request do
     end
 
     it 'returns not found with id that does not exist' do
-      get "/items/790"
+      get '/items/790'
       expect(response.status).to eq(404)
     end
-
-end
+  end
 
   describe 'PUT' do
-    it "updates an item properly" do
+    it 'updates an item properly' do
       item = Item.create valid_attributes
 
       put "/items/#{item.id}", params: { item: { amount: 77 } }
@@ -84,7 +83,7 @@ end
       expect(item.amount).to eq(77)
     end
 
-    it "raises bad request error when it cannot update an item" do
+    it 'raises bad request error when it cannot update an item' do
       item = Item.create valid_attributes
 
       put "/items/#{item.id}", params: { item: { amount: 'seventy-seven' } }
@@ -93,5 +92,4 @@ end
       expect(item.amount).to eq(1)
     end
   end
-
 end
