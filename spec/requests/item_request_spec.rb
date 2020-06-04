@@ -2,16 +2,17 @@ require 'rails_helper'
 
 RSpec.describe 'Item endpoints', type: :request do
   let(:valid_attributes) { { name: 'steak', amount: 1 } }
+  items_url = '/api/v1/items/'
 
   describe 'POST' do
     it 'creates an item' do
-      post '/items', { params: { item: valid_attributes } }
+      post items_url, { params: { item: valid_attributes } }
 
       expect(response).to have_http_status(:created)
     end
 
     it 'returns error on create an item with missing amount' do
-      post '/items', { params: { item: { name: 'steak' } } }
+      post items_url, { params: { item: { name: 'steak' } } }
       error_response = JSON.parse(response.body)['data']
 
       expect(response.status).to eq(400)
@@ -19,7 +20,7 @@ RSpec.describe 'Item endpoints', type: :request do
     end
 
     it 'returns error on create an item with missing name' do
-      post '/items', { params: { item: { amount: 3 } } }
+      post items_url, { params: { item: { amount: 3 } } }
       error_response = JSON.parse(response.body)['data']
 
       expect(response.status).to eq(400)
@@ -31,7 +32,7 @@ RSpec.describe 'Item endpoints', type: :request do
     it 'gets all items' do
       Item.create valid_attributes
       Item.create({ name: 'chicken', amount: 4 })
-      get '/items'
+      get items_url
 
       item_response = JSON.parse(response.body)
       first_item = item_response[0]
@@ -46,7 +47,7 @@ RSpec.describe 'Item endpoints', type: :request do
     end
 
     it 'returns an empty list when there are no items' do
-      get '/items'
+      get items_url
 
       item_response = JSON.parse(response.body)
 
@@ -58,7 +59,7 @@ RSpec.describe 'Item endpoints', type: :request do
   describe 'GET item by Id' do
     it 'gets item by id' do
       item = Item.create valid_attributes
-      get "/items/#{item.id}"
+      get "#{items_url}#{item.id}"
 
       item_response = JSON.parse(response.body)
 
@@ -68,7 +69,7 @@ RSpec.describe 'Item endpoints', type: :request do
     end
 
     it 'returns not found with id that does not exist' do
-      get '/items/790'
+      get "#{items_url}789"
       expect(response.status).to eq(404)
     end
   end
@@ -77,7 +78,7 @@ RSpec.describe 'Item endpoints', type: :request do
     it 'updates an item properly' do
       item = Item.create valid_attributes
 
-      put "/items/#{item.id}", params: { item: { amount: 77 } }
+      put "#{items_url}#{item.id}", params: { item: { amount: 77 } }
       item.reload
       expect(response.status).to be(201)
       expect(item.amount).to eq(77)
@@ -86,7 +87,7 @@ RSpec.describe 'Item endpoints', type: :request do
     it 'raises bad request error when it cannot update an item' do
       item = Item.create valid_attributes
 
-      put "/items/#{item.id}", params: { item: { amount: 'seventy-seven' } }
+      put "#{items_url}#{item.id}", params: { item: { amount: 'seventy-seven' } }
       item.reload
       expect(response.status).to be(400)
       expect(item.amount).to eq(1)
