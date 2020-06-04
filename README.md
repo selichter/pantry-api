@@ -30,10 +30,6 @@ Stand up app on port :3000:
 Stand up db:
 `docker-compose run web rake db:create`
 
-Run Tests:
-`cucumber .` from the features directory
-`cucumber . health.feature -r step_definitions/health_steps.rb`
-
 Stand up Dev Environment:
 ```
 docker-compose up
@@ -65,3 +61,4 @@ Deploy to heroku:
 
 https://help.heroku.com/63D7ALXT/why-am-i-seeing-user-does-not-have-connect-privilege-error-with-heroku-postgres-on-review-apps
 `heroku rake db:schema:load`
+`heroku rake db:migrate`

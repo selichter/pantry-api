@@ -30,10 +30,9 @@ gem 'activesupport', '>= 6.0.3.1'
 gem 'devise_token_auth'
 
 group :test do
-  gem 'capybara'
-  gem 'cucumber-rails', '~> 1.4', '>= 1.4.3'
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
   gem 'factory_bot_rails'
+  gem 'capybara', '~> 2.7', '>= 2.7.1'
 end
 
 group :development, :test do
