@@ -1,18 +1,16 @@
-require "rails_helper"
-RSpec.describe "Registration", :type => :request do
+require 'rails_helper'
+RSpec.describe 'Registration', type: :request do
   before(:each) do
     @sign_up_url = '/auth/'
     @signup_params = {
-        email: 'user@example.com',
-        password: '12345678',
-        password_confirmation: '12345678'
+      email: 'user@example.com',
+      password: '12345678',
+      password_confirmation: '12345678'
     }
   end
 
   describe 'POST /auth/' do
-
     context 'when signup params is valid' do
-
       before do
         post @sign_up_url, params: @signup_params
       end
@@ -43,20 +41,18 @@ RSpec.describe "Registration", :type => :request do
       end
 
       it 'creates new user' do
-        expect {
-          post @sign_up_url, params: @signup_params.merge({email: "test@example.com"})
-        }.to change(User, :count).by(1)
+        expect do
+          post @sign_up_url, params: @signup_params.merge({ email: 'test@example.com' })
+        end.to change(User, :count).by(1)
       end
     end
 
     context 'when signup params is invalid' do
-
       before { post @sign_up_url }
 
       it 'returns unprocessable entity 422' do
         expect(response.status).to eq 422
       end
-
     end
   end
 end

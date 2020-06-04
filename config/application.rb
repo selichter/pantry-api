@@ -43,6 +43,5 @@ module PantryApi
                  methods: [:get, :post, :options, :delete, :put, :patch]
       end
     end
-
   end
 end

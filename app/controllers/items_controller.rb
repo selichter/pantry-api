@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-
   def index
     @items = Item.all
     render json: @items, status: :ok
@@ -33,11 +32,9 @@ class ItemsController < ApplicationController
     end
   end
 
-
   private
 
   def item_params
     params.require(:item).permit(:name, :amount)
-
   end
 end

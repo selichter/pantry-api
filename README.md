@@ -62,3 +62,13 @@ Deploy to heroku:
 https://help.heroku.com/63D7ALXT/why-am-i-seeing-user-does-not-have-connect-privilege-error-with-heroku-postgres-on-review-apps
 `heroku rake db:schema:load`
 `heroku rake db:migrate`
+
+Lint:
+`bundle exec rubocop`
+
+Lint Autocorrect:
+`bundle exec rubocop -a`
+
+Lint only autocorrect formatting:
+`bundle exec rubocop -x`
+
